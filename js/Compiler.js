@@ -1,4 +1,5 @@
 import { Watcher } from './Watcher.js';
+
 export class Compile {
 
     constructor() {

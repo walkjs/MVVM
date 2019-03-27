@@ -1,4 +1,3 @@
-// import { Watcher } from './Watcher.js';
 // 订阅器
 
 export class Dep {
@@ -12,9 +11,9 @@ export class Dep {
     // 更新视图
     _notify(newVal) {
         this.subs.forEach(val => {
-            val.value = newVal
+            val.value = newVal;
             console.log(val, newVal);
-            val._update()
+            val._update();
         })
     }
 }
