@@ -6,157 +6,17 @@
 </head>
 <body>
     <div id="app">
-        <button @click="doClick">click</button>
+        点击试试
+        <button @click="doClick">{{number}}</button>
+        <input type="text" v-model="number">
         <p>{{number}}</p>
         <p>{{number1}}</p>
         <p>{{number2}}</p>
-        <input type="text" v-model="number">
     </div>
-    <script>
-        function Vue(options) {
-//            this.$options = options
-            this.$el = document.querySelectorAll(options.el)[0]
-            this.$data = options.data
-            this.$methods = options.methods
-            this._init()
-        }
-        Vue.prototype = {
-            _init: function () {
-                _obverse(this.$data)
-                _compile(this.$el, this)
-
-            }
-        }
-        let target = null
-        // 订阅器
-        function Dep() {
-            this.sub = []
-        }
-        Dep.prototype = {
-            // 将watcher添加进来
-            _addSub: function (val) {
-                    this.sub.push(val)
-            },
-            // 更新视图
-            _notify: function (newVal) {
-                this.sub.forEach(val => {
-                    val.value = newVal
-                    val._update()
-                })
-            }
-        }
-        // 数据监听
-        let _obverse = function (data) {
-            if (!data || typeof data !== 'object') {
-                return;
-            }
-            Object.keys(data).forEach( key => {
-                let dep = new Dep()
-                let val = data[key]
-                _obverse(val)
-                Object.defineProperty(data, key, {
-                    enumerable: true,
-                    configurable: true,
-                    get: function () {
-                        // 初始化将watcher添加进来
-                        target && dep._addSub(target);
-                        return val
-                    },
-                    set: function (newVal) {
-                        if (newVal !== val) {
-                            val = newVal
-                            // 数据变动通知更新视图
-                            dep._notify(newVal)
-                        }
-
-                    }
-                })
-            })
-        }
-        // 初始化劫持节点，进行模板编译
-        let _compile = function (node, $vm) {
-            let reg = /\{\{(.*)\}\}/
-
-            Array.prototype.slice.call(node.childNodes).forEach(node => {
-                // dom节点
-                if (isElementNode(node)) {
-                    // 属性编译
-                    compileNode(node, $vm)
-                }
-                // 文本节点
-                if (isTextNode(node) && reg.test(node.textContent)) {
-                    //传入与正则式匹配的第一个字符串
-                    new Watcher($vm, 'text', node, null, RegExp.$1)
-                }
-                if (node.childNodes && node.childNodes.length) {
-                    _compile(node, $vm)
-                }
-            })
-        }
-        // 对节点属性进行编译
-        let compileNode = function (node, $vm) {
-            if(node.hasAttribute('v-model')){
-                new Watcher($vm, 'dir', node, 'value', node.getAttribute('v-model'), 'v-model')
-            }
-            if(node.hasAttribute('@click')){
-                node.onclick = () => {
-                    $vm.$methods[node.getAttribute('@click')].call($vm.$data)
-                }
-            }
-        }
-
-        function Watcher($vm, type, el, attr, exp, attrName) {
-            this.$vm = $vm
-            // 绑定的类型
-            this.type = type
-            // 变量对应节点
-            this.el = el
-            // 指令对应的变量
-            this.attr = attr
-            // 指令或者{{}}对应的变量值
-            this.exp = exp
-            // 绑定的指令
-            this.attrName = attrName
-            this.value = this._init()
-            this._update()
-            if(this.attrName === 'v-model'){
-                this.el.addEventListener('input', (val) => {
-                    //触发set
-                    $vm.$data[this.exp] = val.target.value
-                })
-            }
-        }
-        Watcher.prototype = {
-            _init: function () {
-                target = this;
-                // 为了调用get将自身添加
-                let value = this.$vm.$data[this.exp]
-                target = null;
-                return value
-            },
-            _update: function () {
-                console.log(this)
-                if(this.type === 'dir'){
-                    this.el[this.attr] = this.value
-                }
-                // {{}}
-                else if(this.type === 'text'){
-                    this.el.textContent = this.value;
-                }
-            }
-        }
-
-
-        isElementNode = function(node) {
-            return node.nodeType === 1
-        }
-
-        isTextNode = function(node) {
-            return node.nodeType === 3
-        }
-    </script>
-
-
+    <script src="./js/Observer.js"></script>
+    <script src="./js/compiler.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script src="./js/Vue.js"></script>
     <script>
         new Vue({
             el: '#app',
@@ -171,6 +31,7 @@
                     this.number1 += 2
                     this.number2 += 3
                 },
+
 
             }
         })
