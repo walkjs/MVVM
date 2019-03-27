@@ -1,3 +1,4 @@
+let target = null;
 export class Watcher {
     constructor($vm, type, el, attr, exp, attrName) {
         this.$vm = $vm
@@ -20,9 +21,8 @@ export class Watcher {
             })
         }
     }
-
     _init() {
-        let target = this;
+        target = this;
         // 为了调用get将自身添加
         let value = this.$vm.$data[this.exp]
         target = null;
@@ -39,3 +39,4 @@ export class Watcher {
         }
     }
 }
+export { target };

@@ -1,8 +1,9 @@
 import { Dep } from "./Dep.js";
+import { target } from './Watcher.js';
 
-export class Observe {
+export class Observe{
     constructor() {
-        this.target = null;
+
     }
 
     // 数据监听
@@ -22,7 +23,7 @@ export class Observe {
 
                 get() {
                     // 初始化将watcher添加进来
-                    this.target && dep._addSub(this.target);
+                    target && dep._addSub(target);
                     return val;
                 },
                 set(newVal) {
