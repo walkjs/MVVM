@@ -1,1 +1,16 @@
-## 一个十分简陋的MVVM框架，暂时只支持data中数据一层绑定，方法之间暂时无法互相调用，暂时只支持{{}}、v-model、@click
+# 涓�涓畝鍗曠殑MVVM妗嗘灦
+- 鏆傛椂鍙敮鎸乨ata涓暟鎹竴灞傜粦瀹氾紝鏂规硶涔嬮棿鏆傛椂鏃犳硶浜掔浉璋冪敤
+- 鏀寔{{}}銆乿-model銆丂click
+
+## Run Examples
+[鍦ㄧ嚎demo](https://walkjs.github.io/MVVM/)
+
+```
+npm i -g http-server && http-server .
+```
+
+### TODO
+- [ ] computed
+- [ ] nextTick
+- [ ] watch
+
