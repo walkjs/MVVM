@@ -4,14 +4,14 @@ new Vue({
     el: '#app',
     data: {
         number: 0,
-        number1: 0,
-        number2: 0
+        obj: {
+            a: 1
+        }
     },
     methods: {
         doClick: function () {
+            this.obj.a ++;
             this.number ++;
-            this.number1 += 2;
-            this.number2 += 3;
         }
     }
 });

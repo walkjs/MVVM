@@ -25,7 +25,7 @@ export class Watcher {
     _init() {
         target = this;
         // 为了调用get将自身添加
-        let value = this.$vm.$data[this.exp];
+        let value = parsePath(this.exp)(this.$vm.$data);
         target = null;
         return value;
     }
@@ -38,6 +38,16 @@ export class Watcher {
         else if(this.type === 'text'){
             this.el.textContent = this.value;
         }
+    }
+}
+
+function parsePath(path) {
+    let p = path.split('.');
+    return (data) => {
+        p.forEach(val => {
+            data = data[val]
+        })
+        return data
     }
 }
 export { target };
