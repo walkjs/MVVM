@@ -3,7 +3,7 @@ import { Watcher } from './Watcher.js';
 export class Compile {
 
     constructor() {
-        // this.$vm = $vm;
+
     }
 
     /**
@@ -61,7 +61,7 @@ export class Compile {
         [].slice.call(node.attributes).forEach(val => {
             if (val.name.indexOf('@') !== -1) {
                 node[`on${val.name.split('@')[1]}`] = () => {
-                    $vm.$methods[node.getAttribute(val.name)].call($vm.$data);
+                    $vm.$methods[node.getAttribute(val.name)].call($vm.$options);
                 }
             }
         })

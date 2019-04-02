@@ -3,6 +3,7 @@ import { Observe } from './Observer.js';
 import { Compile } from './Compiler.js';
 export class Vue {
     constructor(options) {
+        this.$options = Object.assign(options.data, options.methods)
         this.$el = document.querySelectorAll(options.el)[0];
         this.$data = options.data;
         this.$methods = options.methods;

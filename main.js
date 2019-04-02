@@ -12,6 +12,10 @@ new Vue({
         doClick: function () {
             this.obj.a ++;
             this.number ++;
+            this.print('触发了函数间的调用')
+        },
+        print: function (str) {
+            console.log(str)
         }
     }
 });
