@@ -6,7 +6,8 @@
 [在线demo](https://walkjs.github.io/MVVM/)
 
 ```
-npm i -g http-server && http-server .
+cnpm i
+node server/index
 ```
 
 ### TODO
