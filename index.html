@@ -6,9 +6,12 @@
 </head>
 <body>
     <div id="app">
-        点击试试
+        点击按钮试试
         <button @click="doClick">{{number}}</button>
+        <br><br>
+        鼠标放按钮上去试试
         <button @mouseover="doClick">{{number}}</button>
+        <br><br>
         <input type="text" v-model="number">
         <p>{{number}}</p>
         <p>{{obj.a}}</p>
