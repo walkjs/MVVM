@@ -42,18 +42,28 @@ export class Compile {
 
     /**
      * 对节点属性进行编译
-     * @param {*} node
-     * @param {*} $vm
+     * @param {Element} node
+     * @param {Vue} $vm
      * @memberof Compile
      */
     compileNode(node, $vm) {
         if(node.hasAttribute('v-model')){
+            /**
+             * @param {Element} $vm vue实例
+             * @param {Vue} 'dir' 表示是指令
+             * @param {Element} node 对应节点
+             * @param {Vue} 'value' 指令对应的节点属性
+             * @param {Element} node.getAttribute('v-model') 指令对应的值
+             * @param {Vue} 'v-model' 指令
+             */
             new Watcher($vm, 'dir', node, 'value', node.getAttribute('v-model'), 'v-model');
         }
-        if(node.hasAttribute('@click')){
-            node.onclick = () => {
-                $vm.$methods[node.getAttribute('@click')].call($vm.$data);
+        [].slice.call(node.attributes).forEach(val => {
+            if (val.name.indexOf('@') !== -1) {
+                node[`on${val.name.split('@')[1]}`] = () => {
+                    $vm.$methods[node.getAttribute(val.name)].call($vm.$data);
+                }
             }
-        }
+        })
     }
 }

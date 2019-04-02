@@ -6,7 +6,7 @@ new Vue({
         number: 0,
         obj: {
             a: 1
-        }
+        },
     },
     methods: {
         doClick: function () {

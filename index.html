@@ -8,10 +8,10 @@
     <div id="app">
         点击试试
         <button @click="doClick">{{number}}</button>
+        <button @mouseover="doClick">{{number}}</button>
         <input type="text" v-model="number">
         <p>{{number}}</p>
         <p>{{obj.a}}</p>
-
     </div>
     <script src="./main.js" type="module"></script>
 </body>

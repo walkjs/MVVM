@@ -1,13 +1,17 @@
+
+import { parsePath } from "./utils.js";
+
 let target = null;
 
 export class Watcher {
     constructor($vm, type, el, attr, exp, attrName) {
+        // vue实例
         this.$vm = $vm;
         // 绑定的类型
         this.type = type;
         // 变量对应节点
         this.el = el;
-        // 指令对应的变量
+        // 指令对应的属性
         this.attr = attr;
         // 指令或者{{}}对应的变量值
         this.exp = exp;
@@ -38,16 +42,6 @@ export class Watcher {
         else if(this.type === 'text'){
             this.el.textContent = this.value;
         }
-    }
-}
-
-function parsePath(path) {
-    let p = path.split('.');
-    return (data) => {
-        p.forEach(val => {
-            data = data[val]
-        })
-        return data
     }
 }
 export { target };

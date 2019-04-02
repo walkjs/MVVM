@@ -12,7 +12,6 @@ export class Dep {
     _notify(newVal) {
         this.subs.forEach(val => {
             val.value = newVal;
-            console.log(val, newVal);
             val._update();
         })
     }

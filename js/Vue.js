@@ -1,3 +1,4 @@
+
 import { Observe } from './Observer.js';
 import { Compile } from './Compiler.js';
 export class Vue {
