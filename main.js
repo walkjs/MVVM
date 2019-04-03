@@ -17,12 +17,12 @@ new Vue({
         console.log(this.number)
     },
     methods: {
-        doClick: function () {
+        doClick() {
             this.obj.a ++;
             this.number ++;
             this.print('触发了函数间的调用')
         },
-        print: function (str) {
+        print(str) {
             console.log(str)
         }
     }
