@@ -8,6 +8,14 @@ new Vue({
             a: 1
         },
     },
+    created(){
+        console.log(document.getElementById('app').innerHTML)
+        console.log(this.number)
+    },
+    mounted(){
+        console.log(document.getElementById('app').innerHTML)
+        console.log(this.number)
+    },
     methods: {
         doClick: function () {
             this.obj.a ++;
